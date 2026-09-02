@@ -52,6 +52,14 @@ Optimising for latent separation and optimising for classification are not the s
 
 The comparison against CHR-Network shows where the approach pays off. The CDAE loses on grade 1 and wins on everything else, including a grade 3 F1 of 0.7821 against 0.5228. The direction of that trade is favourable for this task, because grade 1 is both the most common class and the least consequential for the final slide grade, while grade 3 is rare and drives the treatment decision. It is worth stating the handicaps under which that result was obtained: the CDAE was trained on a balanced subset, so it saw far fewer nuclei in total, and background removal discards the spatial context of neighbouring nuclei that CHR-Network can use. The gain on the difficult grades comes despite both, not because of them.
 
+Fig. 3. Pair plots of the first PCA elements for the highest performance
+AE latent space embeddings. (a) The train results of CDAE-CNN for the
+highest performance model optimized for Bhattacharyya distance. (b) The
+train results of CDAE-CNN for the highest performance model optimized
+for F1-score.
+
+![Fig. 3](figures/CDAE_train_both.png)
+
 ## Dataset
 
 H&E stained ccRCC images from TCGA, annotated as described in the CHR-Network work. The source data are 512x512 crops from whole slide images, with annotations in `.mat` files containing an instance map and a class map. The instance map assigns a unique identifier to each nucleus, which is what makes it possible to separate nuclei inside a cluster. The class map carries the grade label.
@@ -72,6 +80,15 @@ Removing the background is a deliberate deviation from most of the literature, w
 
 Neither the images nor the annotations are redistributed here.
 
+
+
+Fig. 1. Process of preparing nuclei patches for the AE. From left to
+right: nuclei are segmented using the instance map, enclosed within
+uniform bounding boxes, cropped, and then background is removed
+by reapplying the instance map to isolate nuclei within the patches.
+
+![Fig. 1](figures/dataset_small.png)
+
 ## Method
 
 Four autoencoder types, each built in an MLP and a CNN form.
@@ -90,6 +107,14 @@ Architecture and hyperparameters were searched with Optuna, with trial history i
 
 The selected model is the F1-optimised CDAE-CNN. Its encoder is nine convolutional blocks of Conv2d, ReLU and BatchNorm2d, kernel size 7 and stride 1 throughout, with channel counts 26, 23, 22, 17, 16, 15, 4, 3, 2, then flatten, a dense layer of 7 with ReLU, then a latent layer of dimension 10. The decoder mirrors this with transposed convolutions. The classification branch is a dense layer of 18 with ReLU, then 4 outputs with LogSoftmax.
 
+Fig. 2. Visualization of the first three PCA components for training
+results of the highest-performing latent space embeddings. (top) AE
+optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
+Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
+that Grade 4 refers to Non-Tumorous in this context.
+
+![Fig. 2](figures/plot.png)
+
 ## What this repository contains
 
 The code here is the model and training layer: the four autoencoder variants, the MLP and CNN builders that construct encoder and decoder pairs from a layer specification, the data loading, and the training entry points.
@@ -100,30 +125,7 @@ Two implementations differ from their description in the paper, and the code is 
 
 `legacy/keras_prototype/` is an earlier TensorFlow and Keras version of the same idea, superseded by the PyTorch code. It is kept for provenance and shares no code with the rest of the repository.
 
-## Figures
 
-Fig. 1. Process of preparing nuclei patches for the AE. From left to
-right: nuclei are segmented using the instance map, enclosed within
-uniform bounding boxes, cropped, and then background is removed
-by reapplying the instance map to isolate nuclei within the patches.
-
-![Fig. 1](figures/dataset_small.png)
-
-Fig. 2. Visualization of the first three PCA components for training
-results of the highest-performing latent space embeddings. (top) AE
-optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
-Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
-that Grade 4 refers to Non-Tumorous in this context.
-
-![Fig. 2](figures/plot.png)
-
-Fig. 3. Pair plots of the first PCA elements for the highest performance
-AE latent space embeddings. (a) The train results of CDAE-CNN for the
-highest performance model optimized for Bhattacharyya distance. (b) The
-train results of CDAE-CNN for the highest performance model optimized
-for F1-score.
-
-![Fig. 3](figures/CDAE_train_both.png)
 
 Conference poster: ![Fig. 4](figures/isbi25-poster-3.png)
 
