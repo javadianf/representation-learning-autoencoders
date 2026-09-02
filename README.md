@@ -14,10 +14,35 @@ Grading ccRCC nuclei under the WHO/ISUP system means deciding, for each nucleus,
 
 Bhattacharyya distance of the best model of each type, after architecture search and fine tuning. Higher means better separated classes in the latent space.
 
-| Model | AE | CAE | DAE | CDAE |
+<table align="center">
+  <tr>
+    <th>Model</th>
+    <th>AE</th>
+    <th>CAE</th>
+    <th>DAE</th>
+    <th>CDAE</th>
+  </tr>
+  <tr>
+    <td>MLP</td>
+    <td>14.75</td>
+    <td>24.50</td>
+    <td>17.43</td>
+    <td>34.62</td>
+  </tr>
+  <tr>
+    <td>CNN</td>
+    <td>16.33</td>
+    <td>19.21</td>
+    <td>25.93</td>
+    <td>47.23</td>
+  </tr>
+</table>
+
+<!--| Model | AE | CAE | DAE | CDAE |
 |-------|-------|-------|-------|-------|
 | MLP | 14.75 | 24.50 | 17.43 | 34.62 |
-| CNN | 16.33 | 19.21 | 25.93 | 47.23 |
+| CNN | 16.33 | 19.21 | 25.93 | 47.23 |-->
+
 
 Fig. 1. Visualization of the first three PCA components for training
 results of the highest-performing latent space embeddings. (top) AE
@@ -32,7 +57,7 @@ that Grade 4 refers to Non-Tumorous in this context.
 
 Effect of the search objective on the CDAE-CNN model. The same architecture search was run twice, once maximising latent separation and once maximising F1.
 
-| Metric | Bhattacharyya optimised | F1 optimised |
+<!--| Metric | Bhattacharyya optimised | F1 optimised |
 |--------|--------------------------|--------------|
 | Overall precision | 0.6104 | 0.6985 |
 | Overall recall | 0.6111 | 0.7008 |
@@ -41,17 +66,20 @@ Effect of the search objective on the CDAE-CNN model. The same architecture sear
 | Grade 2 F1 | 0.4469 | 0.5481 |
 | Grade 3 F1 | 0.6890 | 0.7821 |
 | Non-tumorous F1 | 0.7520 | 0.8300 |
-| Bhattacharyya distance | 47.23 | 36.90 |
+| Bhattacharyya distance | 47.23 | 36.90 |-->
+
+<table align="center"> <tr> <th>Metric</th> <th>Bhattacharyya optimised</th> <th>F1 optimised</th> </tr> <tr> <td>Overall precision</td> <td>0.6104</td> <td>0.6985</td> </tr> <tr> <td>Overall recall</td> <td>0.6111</td> <td>0.7008</td> </tr> <tr> <td>Overall F1</td> <td>0.6113</td> <td>0.6994</td> </tr> <tr> <td>Grade 1 F1</td> <td>0.5571</td> <td>0.6373</td> </tr> <tr> <td>Grade 2 F1</td> <td>0.4469</td> <td>0.5481</td> </tr> <tr> <td>Grade 3 F1</td> <td>0.6890</td> <td>0.7821</td> </tr> <tr> <td>Non-tumorous F1</td> <td>0.7520</td> <td>0.8300</td> </tr> <tr> <td>Bhattacharyya distance</td> <td>47.23</td> <td>36.90</td> </tr> </table>
 
 Comparison against CHR-Network, which was trained on the same source dataset.
 
-| Metric | CHR-Network | CDAE (this work) |
+<!--| Metric | CHR-Network | CDAE (this work) |
 |--------|-------------|------------------|
 | Grade 1 F1 | 0.8243 | 0.6373 |
 | Grade 2 F1 | 0.4793 | 0.5481 |
 | Grade 3 F1 | 0.5228 | 0.7821 |
 | Non-tumorous F1 | 0.7057 | 0.8300 |
-| Balanced accuracy | 0.6405 | 0.7008 |
+| Balanced accuracy | 0.6405 | 0.7008 |-->
+<table align="center"> <tr> <th>Metric</th> <th>CHR-Network</th> <th>CDAE (this work)</th> </tr> <tr> <td>Grade 1 F1</td> <td>0.8243</td> <td>0.6373</td> </tr> <tr> <td>Grade 2 F1</td> <td>0.4793</td> <td>0.5481</td> </tr> <tr> <td>Grade 3 F1</td> <td>0.5228</td> <td>0.7821</td> </tr> <tr> <td>Non-tumorous F1</td> <td>0.7057</td> <td>0.8300</td> </tr> <tr> <td>Balanced accuracy</td> <td>0.6405</td> <td>0.7008</td> </tr> </table>
 
 CHR-Network was trained on the unbalanced dataset, with 45108, 6406, 2779 and 16652 samples for grades 1 to 3 and non-tumorous cells. Grade 1 dominance inflates its overall accuracy, which is why balanced accuracy is the row to compare on.
 
