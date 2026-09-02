@@ -125,7 +125,7 @@ for F1-score.
 
 ![Fig. 3](figures/CDAE_train_both.png)
 
-Conference poster: ![Fig. 4](figures/isbi25-poster-24.pdf)
+Conference poster: ![Fig. 4](figures/isbi25-poster-3.png)
 
 ## Repository layout
 
