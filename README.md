@@ -1,5 +1,6 @@
-# Comparative Analysis of Unsupervised and Supervised Autoencoders for Nuclei Classification in Clear Cell Renal Cell Carcinoma Images
----
+# Representation Learning in Autoencoder Latent Spaces, from Unsupervised to Supervised
+Four autoencoder variants, differing in what constraint is applied to the latent space, compared by how well that space separates known classes.
+
 ## Publication
 
 This repository is the reference implementation of the autoencoder models used to grade individual cell nuclei in clear cell renal cell carcinoma (ccRCC) histopathology for the ISBI 2025 paper:
@@ -17,6 +18,17 @@ Bhattacharyya distance of the best model of each type, after architecture search
 |-------|-------|-------|-------|-------|
 | MLP | 14.75 | 24.50 | 17.43 | 34.62 |
 | CNN | 16.33 | 19.21 | 25.93 | 47.23 |
+
+Fig. 2. Visualization of the first three PCA components for training
+results of the highest-performing latent space embeddings. (top) AE
+optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
+Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
+that Grade 4 refers to Non-Tumorous in this context.
+
+<p align="center">
+  <img src="figures/plot.png" alt="Fig. 2">
+</p>
+<!-- ![Fig. 2](figures/plot.png) -->  
 
 Effect of the search objective on the CDAE-CNN model. The same architecture search was run twice, once maximising latent separation and once maximising F1.
 
@@ -42,6 +54,15 @@ Comparison against CHR-Network, which was trained on the same source dataset.
 | Balanced accuracy | 0.6405 | 0.7008 |
 
 CHR-Network was trained on the unbalanced dataset, with 45108, 6406, 2779 and 16652 samples for grades 1 to 3 and non-tumorous cells. Grade 1 dominance inflates its overall accuracy, which is why balanced accuracy is the row to compare on.
+
+
+
+![Confusion matrix, CDAE MLP and CNN](figures/fig3_confusion_bhattacharyya.png)
+
+*Fig. 3. Confusion matrix of the CDAE model with MLP (a) and CNN (b) found by Optuna using Bhattacharyya distance.*
+![Confusion matrix, selected CDAE CNN model](figures/fig4_confusion_f1.png)
+
+*Fig. 4. Confusion matrix of the selected CDAE CNN model found by Optuna using F1 score.*
 
 ## Findings
 
@@ -102,22 +123,21 @@ Four autoencoder types, each built in an MLP and a CNN form.
 
 **CDAE.** Adds a classification branch on top of the latent vector. The classification loss is a weighted negative log likelihood, combined with the reconstruction and latent-structure terms.
 
+![Optuna neural architecture search overview](figures/fig1_optuna_overview.png)
+
+*Fig. 1. Optuna neural architecture search overview.*
+
 Latent separability is measured with Bhattacharyya distance. Each latent dimension is min-max scaled, per class histograms are built with bin count set to the square root of the class sample count, each histogram is normalised to sum to one so it approximates a density, pairwise distances are computed into a symmetric matrix, and the mean of the upper triangle excluding the diagonal is the score. Davies-Bouldin, Calinski-Harabasz, Silhouette and MANOVA were considered first. They were set aside because treating cohesion and dispersion as independent quantities misreads latent spaces that are tightly clustered but poorly separated, and because MANOVA assumes normality that latent spaces do not provide. KL divergence was rejected for asymmetry.
 
 Architecture and hyperparameters were searched with Optuna, with trial history in a SQL database and a funnel constraint forcing encoder widths to decrease monotonically. Search ranges: latent dimension 2 to 25, layer count 3 to 12, MLP width 8 to 256, CNN channels 1 to 32, CNN kernel size 3 to 7 in steps of 2, CNN dense layer 4 to 32, learning rate 1e-3 to 1e-2 on a log scale, contractive weight 0.05 to 5, discriminative weight 0.5 to 5, classifier dense layer 4 to 32, classification weight 1 to 10. Trials trained on a proxy set of 512 images per class for 30 epochs, and the winning configuration was then retrained on the full training set.
 
 The selected model is the F1-optimised CDAE-CNN. Its encoder is nine convolutional blocks of Conv2d, ReLU and BatchNorm2d, kernel size 7 and stride 1 throughout, with channel counts 26, 23, 22, 17, 16, 15, 4, 3, 2, then flatten, a dense layer of 7 with ReLU, then a latent layer of dimension 10. The decoder mirrors this with transposed convolutions. The classification branch is a dense layer of 18 with ReLU, then 4 outputs with LogSoftmax.
 
-Fig. 2. Visualization of the first three PCA components for training
-results of the highest-performing latent space embeddings. (top) AE
-optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
-Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
-that Grade 4 refers to Non-Tumorous in this context.
+![Searched values for the AE MLP models](figures/fig2_search_values.png)
 
-<p align="center">
-  <img src="figures/plot.png" alt="Fig. 2">
-</p>
-<!-- ![Fig. 2](figures/plot.png) -->
+*Fig. 2. Overview of the searched values for the AE MLP models.*
+
+
 
 ## What this repository contains
 
