@@ -113,7 +113,10 @@ optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
 Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
 that Grade 4 refers to Non-Tumorous in this context.
 
-![Fig. 2](figures/plot.png)
+<p align="center">
+  <img src="figures/plot.png" alt="Fig. 2">
+</p>
+<!-- ![Fig. 2](figures/plot.png) -->
 
 ## What this repository contains
 
