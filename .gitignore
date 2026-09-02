@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+.conda/
+
+# Data. Nuclei patches, the .mat annotation files they are cut from, and the
+# .npy bundles built by the legacy preprocessing notebooks.
+data/
+*.mat
+*.npy
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+grades_mapping.csv
+
+# Model outputs. One folder per run under AE_MODELS, each holding a checkpoint,
+# the torch.save of the whole model, a summary and the run plots.
+models/
+*.pth
+*.pt
+*.h5
+*.keras
+meta_report.json
+train_history.json
+clustering_metric.json
+
+# Run artefacts
+*.svg
+*.pdf
+!docs/**/*.pdf
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
