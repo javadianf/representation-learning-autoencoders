@@ -19,7 +19,7 @@ Bhattacharyya distance of the best model of each type, after architecture search
 | MLP | 14.75 | 24.50 | 17.43 | 34.62 |
 | CNN | 16.33 | 19.21 | 25.93 | 47.23 |
 
-Fig. 2. Visualization of the first three PCA components for training
+Fig. 1. Visualization of the first three PCA components for training
 results of the highest-performing latent space embeddings. (top) AE
 optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
 Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
@@ -57,12 +57,12 @@ CHR-Network was trained on the unbalanced dataset, with 45108, 6406, 2779 and 16
 
 
 
-Confusion matrix of the CDAE model with MLP (a) and CNN (b) found by Optuna using Bhattacharyya distance.
+Fig. 2. Confusion matrix of the CDAE model with MLP (a) and CNN (b) found by Optuna using Bhattacharyya distance.
 <p align="center">
   <img src="figures/fig3_confusion_bhattacharyya.png" alt="Confusion matrix, CDAE MLP and CNN" width="500">
 </p>
 
-Confusion matrix of the selected CDAE CNN model found by Optuna using F1 score
+Fig. 3. Confusion matrix of the selected CDAE CNN model found by Optuna using F1 score
 <p align="center">
   <img src="figures/fig4_confusion_f1.png" alt="Confusion matrix, selected CDAE CNN model" width="500">
 </p>
@@ -78,7 +78,7 @@ Optimising for latent separation and optimising for classification are not the s
 
 The comparison against CHR-Network shows where the approach pays off. The CDAE loses on grade 1 and wins on everything else, including a grade 3 F1 of 0.7821 against 0.5228. The direction of that trade is favourable for this task, because grade 1 is both the most common class and the least consequential for the final slide grade, while grade 3 is rare and drives the treatment decision. It is worth stating the handicaps under which that result was obtained: the CDAE was trained on a balanced subset, so it saw far fewer nuclei in total, and background removal discards the spatial context of neighbouring nuclei that CHR-Network can use. The gain on the difficult grades comes despite both, not because of them.
 
-Fig. 3. Pair plots of the first PCA elements for the highest performance
+Fig. 4. Pair plots of the first PCA elements for the highest performance
 AE latent space embeddings. (a) The train results of CDAE-CNN for the
 highest performance model optimized for Bhattacharyya distance. (b) The
 train results of CDAE-CNN for the highest performance model optimized
@@ -108,7 +108,7 @@ Neither the images nor the annotations are redistributed here.
 
 
 
-Fig. 1. Process of preparing nuclei patches for the AE. From left to
+Fig. 5. Process of preparing nuclei patches for the AE. From left to
 right: nuclei are segmented using the instance map, enclosed within
 uniform bounding boxes, cropped, and then background is removed
 by reapplying the instance map to isolate nuclei within the patches.
@@ -131,7 +131,7 @@ Four autoencoder types, each built in an MLP and a CNN form.
   <img src="figures/fig1_optuna_overview.png" alt="Optuna neural architecture search overview" width="500">
 </p>
 
-*Fig. 1. Optuna neural architecture search overview.*
+*Fig. 6. Optuna neural architecture search overview.*
 
 Latent separability is measured with Bhattacharyya distance. Each latent dimension is min-max scaled, per class histograms are built with bin count set to the square root of the class sample count, each histogram is normalised to sum to one so it approximates a density, pairwise distances are computed into a symmetric matrix, and the mean of the upper triangle excluding the diagonal is the score. Davies-Bouldin, Calinski-Harabasz, Silhouette and MANOVA were considered first. They were set aside because treating cohesion and dispersion as independent quantities misreads latent spaces that are tightly clustered but poorly separated, and because MANOVA assumes normality that latent spaces do not provide. KL divergence was rejected for asymmetry.
 
@@ -141,7 +141,7 @@ The selected model is the F1-optimised CDAE-CNN. Its encoder is nine convolution
 
 ![Searched values for the AE MLP models](figures/fig2_search_values.png)
 
-*Fig. 2. Overview of the searched values for the AE MLP models.*
+*Fig. 7. Overview of the searched values for the AE MLP models.*
 
 
 
@@ -157,7 +157,7 @@ Two implementations differ from their description in the paper, and the code is 
 
 
 
-Conference poster: ![Fig. 4](figures/isbi25-poster-3.png)
+Fig. 8.  Conference poster: ![Fig. 4](figures/isbi25-poster-3.png)
 
 ## Repository layout
 
