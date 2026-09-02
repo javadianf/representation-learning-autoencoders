@@ -107,7 +107,7 @@ right: nuclei are segmented using the instance map, enclosed within
 uniform bounding boxes, cropped, and then background is removed
 by reapplying the instance map to isolate nuclei within the patches.
 
-`figures/dataset_small.png`
+![Fig. 1](figures/dataset_small.png)
 
 Fig. 2. Visualization of the first three PCA components for training
 results of the highest-performing latent space embeddings. (top) AE
@@ -115,7 +115,7 @@ optimized for Bhattacharyya distance. (middle) CDAE-CNN optimized for
 Bhattacharyya distance. (bottom) CDAE-CNN optimized for F1 score. Note
 that Grade 4 refers to Non-Tumorous in this context.
 
-`figures/plot.png`
+![Fig. 2](figures/plot.png)
 
 Fig. 3. Pair plots of the first PCA elements for the highest performance
 AE latent space embeddings. (a) The train results of CDAE-CNN for the
@@ -123,9 +123,9 @@ highest performance model optimized for Bhattacharyya distance. (b) The
 train results of CDAE-CNN for the highest performance model optimized
 for F1-score.
 
-`figures/CDAE_train_both.png`
+![Fig. 3](figures/CDAE_train_both.png)
 
-Conference poster: `figures/isbi25-poster-24.pdf`
+Conference poster: ![Fig. 4](figures/isbi25-poster-24.pdf)
 
 ## Repository layout
 
