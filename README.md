@@ -127,7 +127,9 @@ Four autoencoder types, each built in an MLP and a CNN form.
 
 **CDAE.** Adds a classification branch on top of the latent vector. The classification loss is a weighted negative log likelihood, combined with the reconstruction and latent-structure terms.
 
-![Optuna neural architecture search overview](figures/fig1_optuna_overview.png)
+<p align="center">
+  <img src="figures/fig1_optuna_overview.png" alt="Optuna neural architecture search overview" width="500">
+</p>
 
 *Fig. 1. Optuna neural architecture search overview.*
 
