@@ -132,21 +132,32 @@ Conference poster: ![Fig. 4](figures/isbi25-poster-3.png)
 ## Repository layout
 
 ```
-autoencoder/          model classes, all subclassing the shared base
-  autoencoder.py      base class: training loop, checkpointing, latent extraction, plots
-  plain.py            AE, reconstruction only
-  contractive.py      CAE, Jacobian penalty
-  discriminative.py   DAE, latent class-structure term
-  classifier.py       CDAE, classification branch and centroid loss
-maker/                encoder and decoder builders
-  handlers.py         activation lookup and layer-spec expansion
-  mlp.py              dense encoder and mirrored decoder
-  cnn.py              convolutional encoder and mirrored decoder
-dataloaders.py        ImageFolder loaders, plus one-off dataset reorganisation
-reporting.py          appends per-run metadata to a JSON report
-clustering_eval.py    Davies-Bouldin score over saved models
-scripts/              training entry points
-legacy/keras_prototype/   earlier TensorFlow version, not maintained
+```text
+├── src/
+│   ├── autoencoder/
+│   │   ├── autoencoder.py          base class: training loop, checkpointing, latent extraction, plots
+│   │   ├── plain.py                AE, reconstruction only
+│   │   ├── contractive.py          CAE, Jacobian penalty
+│   │   ├── discriminative.py       DAE, latent class-structure term
+│   │   └── classifier.py           CDAE, classification branch and centroid loss
+│   ├── maker/
+│   │   ├── handlers.py             activation lookup and layer-spec expansion
+│   │   ├── mlp.py                  dense encoder and mirrored decoder
+│   │   └── cnn.py                  convolutional encoder and mirrored decoder
+│   ├── dataloaders.py              ImageFolder loaders and dataset reorganisation
+│   ├── reporting.py                appends per-run metadata to a JSON report
+│   ├── clustering_eval.py          Davies-Bouldin score over saved models
+│   ├── train_mlp.py                training entry point for MLP-based models
+│   ├── train_cnn.py                training entry point for CNN-based models
+│   └── train_cnn_cdae.py           training entry point for CNN-based CDAE
+├── figures/                        figures used in this README
+├── environment.yml                 Conda environment specification
+├── syntax.yml
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+
 ```
 
 ## Environment
