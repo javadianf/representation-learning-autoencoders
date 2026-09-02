@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Javadian. All rights reserved.
+# run: conda env create --file environment.yml
+name: AutoEncoder
+channels:
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.11
+  - ipykernel
+  - matplotlib
+  - pandas
+  - numpy
+  - seaborn
+  - scikit-learn
+  - tqdm
+  - pytorch::pytorch
+  - pytorch::torchvision
+  - pip
+  - pip:
+      - torchsummary
