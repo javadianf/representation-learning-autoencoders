@@ -1,8 +1,9 @@
 # Comparative Analysis of Unsupervised and Supervised Autoencoders for Nuclei Classification in Clear Cell Renal Cell Carcinoma Images
+---
+## Publication
 
-Reference implementation of the autoencoder models used to grade individual cell nuclei in clear cell renal cell carcinoma (ccRCC) histopathology.
-
-**Paper:** [DOI](https://doi.org/10.1109/isbi60581.2025.10981207)
+This repository is the reference implementation of the autoencoder models used to grade individual cell nuclei in clear cell renal cell carcinoma (ccRCC) histopathology for the ISBI 2025 paper:
+##    [Comparative Analysis of Unsupervised and Supervised Autoencoders for Nuclei Classification in Clear Cell Renal Cell Carcinoma Images](https://doi.org/10.1109/isbi60581.2025.10981207)
 
 ## Problem
 
