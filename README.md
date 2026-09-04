@@ -87,7 +87,7 @@ CHR-Network was trained on the unbalanced dataset, with 45108, 6406, 2779 and 16
 
 Fig. 2. Confusion matrix of the CDAE model with CNN found by Optuna using Bhattacharyya distance.
 <p align="center">
-  <img src="figures/confusion_matrix_CDAE_CNN_bhs.pdf" alt="Confusion matrix, CDAE MLP and CNN" width="500">
+  <img src="figures/fig3_confusion_bhattacharyya_.png" alt="Confusion matrix, CDAE MLP and CNN" width="500">
 </p>
 
 Fig. 3. Confusion matrix of the selected CDAE CNN model found by Optuna using F1 score
